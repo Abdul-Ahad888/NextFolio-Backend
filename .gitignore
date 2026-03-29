@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Environment variables (VERY IMPORTANT)
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# Build / cache
+dist/
+build/
+.cache/
+
+# Uploaded files (IMPORTANT if you're storing images locally)
+uploads/
+
+# Sequelize / DB files (if any local)
+*.sqlite
+*.sqlite3
+
+# Coverage
+coverage/
+
+# Misc
+.idea/
+.vscode/
