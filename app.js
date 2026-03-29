@@ -8,7 +8,7 @@ const adminRoute = require('./routes/AdminLogin.route')
 const app = express()
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://nextfolio-portfolio.netlify.app",
     credentials: true
 }));
 
