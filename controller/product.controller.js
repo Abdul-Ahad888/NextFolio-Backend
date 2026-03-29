@@ -38,7 +38,7 @@ const createProduct = async (req, res) => {
     }
 
     try {
-        const backendURL = process.env.BACKEND_URL || "http://localhost:5000";
+        const backendURL = process.env.BACKEND_URL || "https://nextfolio-backend.vercel.app";
 
         const desktopImage = req.files.desktopImage ? `${backendURL}/uploads/projects/${req.files.desktopImage[0].filename}` : null;
         const mobileImage = req.files.mobileImage ? `${backendURL}/uploads/projects/${req.files.mobileImage[0].filename}` : null;
