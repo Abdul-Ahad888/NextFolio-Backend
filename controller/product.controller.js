@@ -100,10 +100,10 @@ const updateProduct = async (req, res) => {
             challengesFaced: parseArray(req.body.challengesFaced),
             achievements: parseArray(req.body.achievements),
 
-            desktopImage: req.files.desktopImage?.[0]?.path || product.desktopImage,
-            mobileImage: req.files.mobileImage?.[0]?.path || product.mobileImage,
-            landingImage: req.files.landingImage?.[0]?.path || product.landingImage,
-            screenshot: req.files.screenshot?.[0]?.path || product.screenshot,
+            desktopImage: req.files?.desktopImage?.[0]?.path || product.desktopImage,
+            mobileImage: req.files?.mobileImage?.[0]?.path || product.mobileImage,
+            landingImage: req.files?.landingImage?.[0]?.path || product.landingImage,
+            screenshot: req.files?.screenshot?.[0]?.path || product.screenshot,
         };
 
         await product.update(updatedPayload)

@@ -8,26 +8,28 @@ const { getProducts, getProduct, createProduct, updateProduct, deleteProduct } =
 router.get('/', getProducts)
 router.get('/:id', getProduct)
 // router.post('/', createProduct)
-router.put('/:id',
+router.put(
+    '/:id',
     upload.fields([
-        { name: "desktopImage", maxCount: 1 },
-        { name: "mobileImage", maxCount: 1 },
-        { name: "landingImage", maxCount: 1 },
-        { name: "screenshot", maxCount: 1 }
+        { name: 'desktopImage', maxCount: 1 },
+        { name: 'mobileImage', maxCount: 1 },
+        { name: 'landingImage', maxCount: 1 },
+        { name: 'screenshot', maxCount: 1 },
     ]),
-    updateProduct)
+    updateProduct
+)
 
 router.delete('/:id', deleteProduct)
 
 router.post(
-    "/create",
+    '/create',
     upload.fields([
-        { name: "desktopImage", maxCount: 1 },
-        { name: "mobileImage", maxCount: 1 },
-        { name: "landingImage", maxCount: 1 },
-        { name: "screenshot", maxCount: 1 }
+        { name: 'desktopImage', maxCount: 1 },
+        { name: 'mobileImage', maxCount: 1 },
+        { name: 'landingImage', maxCount: 1 },
+        { name: 'screenshot', maxCount: 1 },
     ]),
     createProduct
-);
+)
 
 module.exports = router
