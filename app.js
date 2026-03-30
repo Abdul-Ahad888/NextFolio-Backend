@@ -4,6 +4,7 @@ const session = require('express-session')
 
 const productRoute = require('./routes/product.route')
 const adminRoute = require('./routes/AdminLogin.route')
+const mailRoute = require('./routes/contact.route')
 
 const app = express()
 
@@ -19,6 +20,8 @@ app.use(express.json())
 app.use('/api/product', productRoute)
 
 app.use('/', adminRoute)
+
+app.use('/', mailRoute)
 
 app.get('/', (req, res) => {
     res.send("Server Is Running...")
