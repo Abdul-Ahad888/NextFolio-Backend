@@ -1,30 +1,22 @@
-const multer = require("multer")
-const path = require("path")
-const fs = require("fs")
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../config/cloudinary");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const uploadPath = "uploads/projects";
-
-        if (!fs.existsSync(uploadPath)) {
-            fs.mkdirSync(uploadPath, { recursive: true });
-        }
-
-        cb(null, uploadPath);
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + "-" + file.originalname);
-    }
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "nextfolio",
+    allowed_formats: ["jpg", "png", "jpeg", "webp"],
+  },
 });
 
 const fileFilter = (req, file, cb) => {
-    if (!file.mimetype.startsWith("image/")) {
-        return cb("Only images allowed!", false);
-    }
-    cb(null, true);
+  if (!file.mimetype.startsWith("image/")) {
+    return cb(new Error("Only images allowed!"), false);
+  }
+  cb(null, true);
 };
 
+const upload = multer({ storage, fileFilter });
 
-const upload = multer({ storage })
-
-module.exports = { upload }
+module.exports = { upload };

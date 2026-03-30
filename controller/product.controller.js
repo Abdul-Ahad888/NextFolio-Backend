@@ -38,12 +38,11 @@ const createProduct = async (req, res) => {
     }
 
     try {
-        const backendURL = process.env.BACKEND_URL || "https://nextfolio-backend.vercel.app";
 
-        const desktopImage = req.files.desktopImage ? `${backendURL}/uploads/projects/${req.files.desktopImage[0].filename}` : null;
-        const mobileImage = req.files.mobileImage ? `${backendURL}/uploads/projects/${req.files.mobileImage[0].filename}` : null;
-        const landingImage = req.files.landingImage ? `${backendURL}/uploads/projects/${req.files.landingImage[0].filename}` : null;
-        const screenShot = req.files.screenshot ? `${backendURL}/uploads/projects/${req.files.screenshot[0].filename}` : null;
+        const desktopImage = req.files.desktopImage?.[0]?.path || null;
+        const mobileImage = req.files.mobileImage?.[0]?.path || null;
+        const landingImage = req.files.landingImage?.[0]?.path || null;
+        const screenShot = req.files.screenshot?.[0]?.path || null;
 
         const payload = {
             name: req.body.name,
@@ -91,16 +90,21 @@ const updateProduct = async (req, res) => {
 
         if (!product) return res.status(404).json({ msg: "product not found" })
 
-
         const updatedPayload = {
             ...req.body,
+
             keyFeatures: parseArray(req.body.keyFeatures),
             projectGoals: parseArray(req.body.projectGoals),
             technologiesUsed: parseArray(req.body.technologiesUsed),
             lessonsLearned: parseArray(req.body.lessonsLearned),
             challengesFaced: parseArray(req.body.challengesFaced),
             achievements: parseArray(req.body.achievements),
-        }
+
+            desktopImage: req.files.desktopImage?.[0]?.path || product.desktopImage,
+            mobileImage: req.files.mobileImage?.[0]?.path || product.mobileImage,
+            landingImage: req.files.landingImage?.[0]?.path || product.landingImage,
+            screenshot: req.files.screenshot?.[0]?.path || product.screenshot,
+        };
 
         await product.update(updatedPayload)
         res.status(200).json(product)
