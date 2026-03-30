@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const contactMail = require("../controllers/contactMail");
+const contactMail = require("../controller/contact.controller");
 
 router.post('/contact', contactMail)
 
